@@ -639,7 +639,8 @@ namespace UnityGameFramework.Runtime
                 m_ResourceManager.SetReadWritePath(Application.persistentDataPath);
             }
 
-            if (m_EditorResourceMode)
+            if (m_EditorResourceMode 
+                || GFAdapterResourceManager.Instance.UseCustomManager) // 使用了自定义资源管理器时，下面的逻辑不走了
             {
                 return;
             }
