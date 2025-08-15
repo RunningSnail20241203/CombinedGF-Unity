@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using GameFramework.Resource;
 
 namespace GameFramework
 {
@@ -55,6 +56,12 @@ namespace GameFramework
         public static T GetModule<T>() where T : class
         {
             Type interfaceType = typeof(T);
+            if (interfaceType == typeof(IResourceManager))
+            {
+                if (GFAdapterResourceManager.Instance.UseCustomManager)
+                    return GFAdapterResourceManager.Instance as T;
+            }
+            
             if (!interfaceType.IsInterface)
             {
                 throw new GameFrameworkException(Utility.Text.Format("You must get module by interface, but '{0}' is not.", interfaceType.FullName));
