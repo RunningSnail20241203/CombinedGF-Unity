@@ -19,6 +19,15 @@ namespace UnityGameFramework.Runtime
                 GUILayout.Label("<b>Input Touch Information</b>");
                 GUILayout.BeginVertical("box");
                 {
+#if ENABLE_INPUT_SYSTEM
+                    /*DrawItem("Touch Supported", Input.touchSupported.ToString());
+                    DrawItem("Touch Pressure Supported", Input.touchPressureSupported.ToString());
+                    DrawItem("Stylus Touch Supported", Input.stylusTouchSupported.ToString());
+                    DrawItem("Simulate Mouse With Touches", Input.simulateMouseWithTouches.ToString());
+                    DrawItem("Multi Touch Enabled", Input.multiTouchEnabled.ToString());
+                    DrawItem("Touch Count", Input.touchCount.ToString());
+                    DrawItem("Touches", GetTouchesString(Input.touches));*/
+#else
                     DrawItem("Touch Supported", Input.touchSupported.ToString());
                     DrawItem("Touch Pressure Supported", Input.touchPressureSupported.ToString());
                     DrawItem("Stylus Touch Supported", Input.stylusTouchSupported.ToString());
@@ -26,13 +35,15 @@ namespace UnityGameFramework.Runtime
                     DrawItem("Multi Touch Enabled", Input.multiTouchEnabled.ToString());
                     DrawItem("Touch Count", Input.touchCount.ToString());
                     DrawItem("Touches", GetTouchesString(Input.touches));
+#endif
                 }
                 GUILayout.EndVertical();
             }
 
             private string GetTouchString(Touch touch)
             {
-                return Utility.Text.Format("{0}, {1}, {2}, {3}, {4}", touch.position, touch.deltaPosition, touch.rawPosition, touch.pressure, touch.phase);
+                return Utility.Text.Format("{0}, {1}, {2}, {3}, {4}", touch.position, touch.deltaPosition,
+                    touch.rawPosition, touch.pressure, touch.phase);
             }
 
             private string GetTouchesString(Touch[] touches)
