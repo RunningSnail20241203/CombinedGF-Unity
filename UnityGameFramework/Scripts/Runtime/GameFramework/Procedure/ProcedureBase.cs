@@ -15,12 +15,15 @@ namespace GameFramework.Procedure
     /// </summary>
     public abstract class ProcedureBase : FsmState<IProcedureManager>
     {
+        protected ProcedureOwner m_ProcedureOwner;
+        
         /// <summary>
         /// 状态初始化时调用。
         /// </summary>
         /// <param name="procedureOwner">流程持有者。</param>
         protected internal override void OnInit(ProcedureOwner procedureOwner)
         {
+            m_ProcedureOwner = procedureOwner;
             base.OnInit(procedureOwner);
         }
 
@@ -61,6 +64,7 @@ namespace GameFramework.Procedure
         protected internal override void OnDestroy(ProcedureOwner procedureOwner)
         {
             base.OnDestroy(procedureOwner);
+            m_ProcedureOwner = null;
         }
     }
 }
